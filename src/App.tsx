@@ -13,7 +13,7 @@ const App = () => {
   },[])
 
   return <div>
-    <h1>Hour Cat</h1>
+    <h1>Hourly Cat</h1>
     {imageId && <img
         src={`https://meou-api.s3.us-east-2.amazonaws.com/${imageId}.jpeg`}
         width={260}
