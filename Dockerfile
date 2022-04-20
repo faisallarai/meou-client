@@ -1,4 +1,4 @@
-FROM node:17-alpine3.14 as build 
+FROM node:16-alpine as build 
 #also say 
 WORKDIR /app
 #copy the react app to the container
