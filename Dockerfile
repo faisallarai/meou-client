@@ -12,18 +12,9 @@ COPY ./package.json /app/
 # install  dependencies
 RUN yarn --silent
 
+RUN yarn build
+
 # copy everything to /app directory
 COPY . /app
 
-RUN yarn build
-
-COPY . /app
-
-# Stage 2: prod
-FROM nginx:alpine
-
-COPY --from=build /app/build /usr/share/nginx/html
-
-COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
-
-CMD [ "nginx", "-g", "daemon off;" ]
+CMD [ "npm", "start" ]
