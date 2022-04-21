@@ -1,15 +1,27 @@
-# build environment
+# Stage 1: build
 FROM node:16-alpine as build
+
 WORKDIR /app
 
+# add the node_modules folder to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json /app/package.json
-RUN npm install --silent
-COPY . /app
-RUN npm run build
 
-# production environment
-FROM nginx:1.21.5-alpine
+
+COPY ./package.json /app/
+
+# install  dependencies
+RUN yarn --silent
+
+# copy everything to /app directory
+COPY . /app
+
+RUN yarn build
+
+# Stage 2: prod
+FROM nginx:alpine
+
 COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD [ "nginx", "-g", "daemon off;" ]
