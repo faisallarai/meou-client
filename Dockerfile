@@ -17,6 +17,8 @@ COPY . /app
 
 RUN yarn build
 
+COPY . /app
+
 # Stage 2: prod
 FROM nginx:alpine
 
