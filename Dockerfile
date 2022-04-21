@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm i && npm run build
+RUN npm ci --production && npm run build
 
 # Stage 2: prod
 FROM nginx:1.21.5-alpine
