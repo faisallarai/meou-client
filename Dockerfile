@@ -12,8 +12,6 @@ COPY ./package.json /app/
 # install  dependencies
 RUN yarn --silent
 
-RUN yarn build
-
 # copy everything to /app directory
 COPY . /app
 
