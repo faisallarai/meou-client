@@ -3,11 +3,7 @@ FROM node:16-alpine as build
 
 WORKDIR /app
 
-# add the node_modules folder to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-
-COPY ./package.json /app/
+COPY ./package.json /app
 
 # install  dependencies
 RUN yarn --silent
